@@ -1,0 +1,11 @@
+{
+  "name": "ideahub",
+  "version": "1.0.0",
+  "description": "a site that helps manage your ideas",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gbadebo Oluwarimi",
+  "license": "ISC"
+}
