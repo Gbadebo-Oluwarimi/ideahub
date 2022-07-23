@@ -4,7 +4,9 @@
   "description": "a site that helps manage your ideas",
   "main": "Server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node Backend/Server.js",
+    "server":"nodemon Backend/Server.js"
   },
   "author": "Gbadebo Oluwarimi",
   "license": "ISC",
@@ -16,5 +18,9 @@
     "express-async-handler": "^1.2.0",
     "mongoose": "^6.4.6",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19"
   }
 }
