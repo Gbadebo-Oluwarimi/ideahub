@@ -3,13 +3,21 @@ const colors = require('colors');
 const dotenv = require('dotenv').config()
 const { connectdb } = require('./config.js/db');
 const app = express();
-const session = require('express-session');
 
+const session = require('express-session');
+const Mongodbsession = require('connect-mongodb-session')(session)
+
+
+const Store = new Mongodbsession({
+    uri:process.env.MONGO_URI,
+    collection:'mysessions'
+})
 
 app.use(session({
     saveUninitialized:true,
     resave:true,
-    secret:"asuperimportantsecret"
+    secret:"asuperimportantsecret",
+    store:Store,
 }))
 
 

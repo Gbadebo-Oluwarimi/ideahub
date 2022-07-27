@@ -1,10 +1,8 @@
 const express = require('express')
+const { Usercontroller } = require('../controllers/authControllers')
 
 const routes = express.Router()
 
-routes.get('/', (req, res) => {
-    console.log(req.session);
-    res.json({message: "Device Connected Succesfully"})
-})
+routes.get('/', Usercontroller)
 
 module.exports = routes
