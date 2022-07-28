@@ -15,7 +15,7 @@ const Store = new Mongodbsession({
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(session({
-    saveUninitialized:true,
+    saveUninitialized:false,
     resave:true,
     secret:"asuperimportantsecret",
     store:Store,
