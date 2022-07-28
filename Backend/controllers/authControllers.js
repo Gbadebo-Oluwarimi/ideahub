@@ -3,7 +3,6 @@ const asyncexpress = require('express-async-handler')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ForgotPassword = require("../Functions/Forgot");
-const reset = require("../Functions/resetPassword");
 
 
 const Registercontroller = asyncexpress(async(req, res) =>{
