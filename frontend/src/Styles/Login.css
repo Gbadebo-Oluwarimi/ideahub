@@ -1,0 +1,10 @@
+.Login{
+    @apply w-full min-h-screen bg-[url('/src/assets/img6.png')] m-0 p-0 bg-cover bg-no-repeat bg-center
+}
+.Login2{
+    width:100%;
+    min-height:100vh;
+    background: rgba(230, 227, 227, 0.25);
+    backdrop-filter: blur( 1px );
+    -webkit-backdrop-filter: blur( 4px );
+}
