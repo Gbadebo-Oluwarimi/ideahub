@@ -4,40 +4,39 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ForgotPassword = require("../Functions/Forgot");
 
-
-const Registercontroller = asyncexpress(async(req, res) =>{
-    const { email, username, password } = req.body;
-    if(!email || !username || !password ){
-       res.status(400).send({message:"All fields are qequired"});
+const Registercontroller = asyncexpress(async(req, res) => {
+    const { username, email, password } = req.body
+    if(!username || !email || !password){
+        res.status(400)
+        throw new Error("Please fill in all fields")
     }
-    else{
-    let user = await Usermodel.findOne({email})
+    const userExists = await Usermodel.findOne({email})
+    if(userExists){
+        res.status(400)
+        throw new Error('User Already exists')
+    }
+    // Hash password
+    const salt = await bcrypt.genSalt(10)
+    const Hashedpassword = await bcrypt.hash(password, salt);
+    const user = await Usermodel.create({username, email, password:Hashedpassword})
     if(user){
-        res.json({message:"This user already exists"})
+        res.status(201).json({
+            _id:user.id,
+            name:user.username,
+            email:user.email,
+        })
+    }else{
+        res.status(400)
+        throw new Error("Invalid User Data")
     }
-
-    //Hash the password before saving it 
-    const salt = await bcrypt.genSalt(10);
-
-    const hashedpassword = await bcrypt.hash(password, salt);
-
-    user = new Usermodel({
-        email,
-        username,
-        password:hashedpassword,
-    });
-
-    await user.save().then(() => {
-        res.json({message:user})
-    })
-}
 })
 
 const LoginController = asyncexpress(async(req, res) => {
     try {
         const { email, password } = req.body;
     if(!email || !password){
-        res.status(400).send({message:"Fields are required"})
+        res.status(400)
+        throw new Error('All fields are required')
     }
     else{
         let user = await Usermodel.findOne({email})
@@ -50,15 +49,17 @@ const LoginController = asyncexpress(async(req, res) => {
                 req.session.isAuth = true
                 res.redirect('/api/details')
             }else{
-                res.send({message:"Passwords dosent match"}).status(401)
+                res.status(401)
+                throw new Error('password fields do not match')
             }
         }else{
-            res.status(404).send({message:"User does not exist"})
+            res.status(404)
+            throw new Error("user dosen't exist")
         }
     }
     } catch (error) {
         console.log(error);
-        res.send(error)
+        throw new Error('Invalid Credentials')
     }
 })
 

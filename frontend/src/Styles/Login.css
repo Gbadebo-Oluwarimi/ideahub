@@ -1,0 +1,20 @@
+.Login{
+    @apply absolute w-full min-h-screen p-4 bg-[url('/src/assets/img6.png')] m-0 p-0 bg-cover bg-no-repeat bg-center
+}
+.form{
+    background: rgba(255, 255, 255, 0.623);
+box-shadow: 0 8px 32px 0 rgba(209, 211, 245, 0.377);
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
+    @apply m-auto max-w-xl min-h-max my-20 p-10 min-h-max text-gray-500
+}
+.input{
+    @apply w-full bg-slate-200 p-3 pl-4 rounded-md text-black focus:outline-none focus:ring focus:border-blue-500 
+}
+.submit button{
+    @apply m-auto w-full p-3 text-white bg-blue-600 rounded-md focus:outline-none focus:ring focus:ring-blue-600
+}
+.forgot{
+    @apply m-auto w-full 
+}
