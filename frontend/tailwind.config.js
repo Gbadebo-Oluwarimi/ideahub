@@ -6,10 +6,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        poppins:['poppins']
+        poppins:['poppins'],
+        jost:['jost']
       },
       backgroundImage:{
-        'img1':"url('/src/assets/img3.jpg')"
+        'img1':"url('/src/assets/img6.png')"
       }
     },
   },
