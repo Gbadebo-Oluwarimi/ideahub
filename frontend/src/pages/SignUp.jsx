@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { registerUser } from '../features/Auth/authSlice'
 import { useState } from 'react'
+import Svg from '../components/Svg'
 const SignUp = () => {
   const dispatch = useDispatch();
   
@@ -22,7 +23,9 @@ const SignUp = () => {
   }
   return (
     <>
+   
         <div className='SignUp'>
+        <Svg/>
           <div className='ml-3 mr-3'>
                 <div className='form'>
                 <div className='absolute bg-slate-600 rounded-full w-12 h-12 -top-5'></div>

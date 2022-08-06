@@ -1,5 +1,5 @@
 .SignUp{
-    @apply absolute w-full min-h-screen p-4 bg-img1 m-0 p-0 bg-cover bg-no-repeat bg-center
+    @apply absolute w-full min-h-screen p-4 bg-img1 m-0 p-0 bg-cover bg-no-repeat bg-center overflow-hidden
 }
 .form{
     background: rgba(255, 255, 255, 0.623);

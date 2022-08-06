@@ -7,4 +7,9 @@
     -webkit-backdrop-filter: blur( 4px );
     min-height: 100%;
     min-width: 100%;
+    align-items: center;
+}
+.popup{
+    margin:0 auto;
+    max-width:400px;
 }

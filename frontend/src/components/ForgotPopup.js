@@ -3,7 +3,7 @@ import '../Styles/ComponentStyles/forgotPopup.css'
 const ForgotPopup = () => {
   return (
     <div className='back'>
-        <div className=''>Forgot Password </div>
+        <div className='popup'>Forgot Password </div>
     </div>
   )
 }
