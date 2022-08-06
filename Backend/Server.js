@@ -5,6 +5,7 @@ const { connectdb } = require('./config.js/db');
 const app = express();
 
 const session = require('express-session');
+const { errorHandler } = require('./middleware/errormiddleware');
 const Mongodbsession = require('connect-mongodb-session')(session)
 
 
@@ -20,13 +21,14 @@ app.use(session({
     secret:"asuperimportantsecret",
     store:Store,
 }))
-
 const PORT = 5000 || process.env.PORT;
 connectdb();
-
 app.listen(PORT, () => {
     console.log(`Server Started at ${PORT} 🚀 🚀` .cyan.underline)
 })
 
+
 app.use('/api/auth', require('./routes/authRoutes.js'));
 app.use('/api/details', require('./routes/dashboardRoutes.js'));
+
+app.use(errorHandler)

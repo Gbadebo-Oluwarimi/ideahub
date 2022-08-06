@@ -1,7 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../Styles/ComponentStyles/forgotPopup.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { ForgotPassword } from '../features/Auth/forgotSlice'
+import Success from './Success'
+import Error from './Error'
 const ForgotPopup = ({ShowPopup}) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("")
+  const { isError, isSuccess,msg } = useSelector((state) => state.forgot)
+
+  // useEffect(() => {
+  //   console.log('okay')
+  // }, [isError, isSuccess]);
+  const HandleSubmit = () => {
+    if(!email){
+      return <Error msg="The email field is not filled"/>
+    }
+    dispatch(ForgotPassword(email))
+  }
+
+
+
   return (
     <>
     <div className='back'>
@@ -14,11 +33,13 @@ const ForgotPopup = ({ShowPopup}) => {
       <div className='mb-10'>
         <label className='font-bold p-0 m-0'>Email</label>
         <legend className='mb-2'><small>Enter a valid Email Address</small></legend>
-        <input type="text" value={email}  onChange={(e) => setEmail(e.target.value)} className='input'/>
+        <input type="email" value={email}  onChange={(e) => setEmail(e.target.value)} className='input'/>
         <small>Must include all the symbols</small>
       </div> 
+      {isSuccess && <Success msg={msg}/>}
+      {isError && <Error msg ={msg}/>}
       <div className='submit'>
-      <button className='button'>Send</button> 
+      <button className='button' onClick={() => HandleSubmit()}>Send</button> 
       </div>         
     </div>
     </div>

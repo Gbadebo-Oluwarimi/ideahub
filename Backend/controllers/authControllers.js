@@ -77,8 +77,8 @@ const forgotPassword = asyncexpress(async(req, res) =>{
 
     const user = await Usermodel.findOne({email});
     if(!user){
-        res.send({message:"User Doesn't Exist"})
-        return;
+        res.status(400)
+        throw new Error('This user dosent exist')
     }else{
         //creating a one time link to reset the password using jwt
         const link2 = ForgotPassword(user._id, user.password, user.email);

@@ -36,7 +36,7 @@ export const authSlice = createSlice({
             state.isError=false
             state.loading=false
             state.isSuccess=false
-            state.message=""
+            state.msg=""
         }
     },
     extraReducers:(builder) => {
@@ -62,15 +62,14 @@ export const authSlice = createSlice({
             state.loading=false
             state.isError=false
             state.isSuccess=true
-            state.message=action.payload
+            state.msg=action.payload
         })
         builder.addCase(LoginUser.rejected, (state, action) => {
             state.isSuccess=false
-            state.message=action.payload
+            state.msg=action.payload
             state.isError=true
             state.loading=false
         })
-        
     }
 })
 
