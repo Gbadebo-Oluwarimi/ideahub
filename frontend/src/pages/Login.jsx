@@ -15,8 +15,8 @@ const Login = () => {
 
 
   const ShowPopup = () => {
-    console.log('worked')
-    setForgot(true);
+    console.log(forgot)
+    setForgot(!forgot);
   }
     const HandleSubmit = () => {
       const userdata ={ 
@@ -29,7 +29,7 @@ const Login = () => {
     
         <div className='Login'>
           <Svg/>
-        {forgot ? <ForgotPopup/> : null}
+        {forgot ? <ForgotPopup ShowPopup={ShowPopup}/> : null}
           <div className='ml-3 mr-3'>
                 <div className='form'>
                   <div className='absolute bg-slate-600 rounded-full w-12 h-12 -top-5'></div>
@@ -51,7 +51,7 @@ const Login = () => {
                     <div className="mt-8 mb-10 p-5 bg-slate-300 rounded-md">
                             <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores libero minima labore nulla Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora quas veniam maiores exercitationem inventore eveniet sapiente quisquam cum,  </small>
                     </div>
-                    <div className='forgot'><small>Forgot Password <b onClick={() => ShowPopup()}>Click Here to Recover</b></small></div>
+                    <div className='forgot'><small>Forgot Password <b onClick={() => ShowPopup()}><div className='cursor-pointer'>Click Here to Recover</div></b></small></div>
                     <div className='submit'>
                     <button onClick={() => HandleSubmit()}>Login</button>
                     </div>

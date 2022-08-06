@@ -1,7 +1,7 @@
 .back{
-    position: absolute;
+    position: fixed;
     z-index:10;
-    background: rgba(114, 112, 112, 0.233);
+    background: rgba(114, 112, 112, 0.329);
     box-shadow: 0 8px 32px 0 rgba(209, 211, 245, 0.377);
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
@@ -10,6 +10,18 @@
     align-items: center;
 }
 .popup{
-    margin:0 auto;
-    max-width:400px;
+    position: relative;
+    background: rgba(167, 160, 160, 0.295);
+    box-shadow: 0 8px 32px 0 rgba(209, 211, 245, 0.377);
+    backdrop-filter: blur( 3px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    margin-left: 2;
+   @apply m-auto max-w-lg object-center mt-40 p-8 text-gray-800;
+}
+.submit button{
+    @apply m-auto w-full p-3 text-white bg-blue-600 rounded-md focus:outline-none focus:ring focus:ring-blue-600
+}
+.cancel{
+    @apply flex float-right
 }
