@@ -8,7 +8,7 @@ const ForgotPassword = (id, password, email) => {
         id,
     }
     const token = jwt.sign(payload, secret, {expiresIn: '20m'})
-    const link = `http://localhost:5000/api/auth/reset-password/${id}/${token}`
+    const link = `http://localhost:3000/reset-password/${id}/${token}`
     return link;
 
 }

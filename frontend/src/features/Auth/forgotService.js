@@ -1,14 +1,26 @@
 import axios from 'axios'
 
-const API_URL = '/api/auth/'
+const URL = '/api/auth/'
 
 const forgotPassword = async(userdata) => {
-    const res = await axios.post(API_URL + 'forgot-password',userdata)
+    console.log(userdata)
+    const res = await axios.post(URL + 'forgot-password',userdata)
+   if(res.data){
+    console.log(res.data)
+   }
     return res.data
 }
 
+const resetPassword = async(userdata) => {
+    const response = await axios.post(`${URL}reset-password/${userdata.id}/${userdata.token}`);
+    if(response.data){
+        console.log(response.data)
+    }
+    return response.data;
+}
 const forgotService = {
     forgotPassword,
+    resetPassword,
 }
 
 export default forgotService

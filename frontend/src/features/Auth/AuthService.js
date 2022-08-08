@@ -17,14 +17,9 @@ const Login = async(userdata) => {
     }
     return response.data
 }
-const ForgotPassword = async(userdata) => {
-    const res = await axios.post(API_URL + 'forgot-password',userdata)
-    return res.data
-}
 
 const authService = {
     register,
     Login,
-    ForgotPassword,
 }
 export default authService

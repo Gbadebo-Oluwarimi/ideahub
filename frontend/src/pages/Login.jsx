@@ -1,7 +1,8 @@
 import React from 'react'
 import '../Styles/Login.css'
+import { useDispatch,} from 'react-redux'
+import {reset} from '../features/Auth/forgotSlice'
 import{ useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { LoginUser } from '../features/Auth/authSlice'
 import ForgotPopup from '../components/ForgotPopup'
@@ -14,9 +15,11 @@ const Login = () => {
   const [forgot, setForgot] = useState(false)
 
 
+
   const ShowPopup = () => {
     console.log(forgot)
     setForgot(!forgot);
+    dispatch(reset())
   }
     const HandleSubmit = () => {
       const userdata ={ 

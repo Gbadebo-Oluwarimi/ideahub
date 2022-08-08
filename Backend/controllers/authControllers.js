@@ -73,17 +73,15 @@ const LogoutController = (req, res) => {
 
 const forgotPassword = asyncexpress(async(req, res) =>{
     const { email } = req.body
-    console.log(req.body)
-
     const user = await Usermodel.findOne({email});
-    if(!user){
-        res.status(400)
-        throw new Error('This user dosent exist')
-    }else{
+    if(user){
         //creating a one time link to reset the password using jwt
         const link2 = ForgotPassword(user._id, user.password, user.email);
         console.log(link2)
-    res.json({message:"Forgot Password"})
+        res.json("Email Sent to " + email).status(201)
+    }else{
+        res.status(400);
+        throw new Error('This User Dosent Exist')
     }
 })
 
@@ -93,7 +91,7 @@ const ResetPassword = asyncexpress(async(req, res) => {
     //check if id exists in database
     const user = await Usermodel.findById(id);
     if(!user){
-        res.send({message:"User Dosen't exist"}).status(401);
+        res.json("User Dosen't Exist").status(401);
         return;
     }else{
         const secret = process.env.JWT_SECRET + user.password;

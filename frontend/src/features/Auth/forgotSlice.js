@@ -10,11 +10,18 @@ const initialState ={
 
 
 
-export const ForgotPassword =createAsyncThunk('auth/forgot-password', async(email, thunkAPI) => {
+export const ForgotPassword = createAsyncThunk('forgot/forgot-password', async(email, thunkAPI) => {
     try {
         return await forgotService.forgotPassword(email);
     } catch (error) {
-        console.log(error.message)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message ||error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+export const Resetpassword = createAsyncThunk('forgot/reset-password', async(userdata, thunkAPI) => {
+    try {
+        return await forgotService.resetPassword(userdata);
+    } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message ||error.toString()
         return thunkAPI.rejectWithValue(message)
     }
@@ -47,6 +54,23 @@ const forgotSlice = createSlice({
             state.isError = true
             state.isSuccess = false
             state.msg = action.payload
+        })
+
+        // reset-password
+        builder.addCase(Resetpassword.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(Resetpassword.fulfilled, (state, action) => {
+            state.loading=false
+            state.isError=false
+            state.isSuccess=true
+            state.msg=action.payload
+        })
+        builder.addCase(Resetpassword.rejected, (state, action) => {
+            state.loading=false
+            state.isError=true
+            state.isSuccess=false
+            state.msg=action.payload
         })
     }
 })

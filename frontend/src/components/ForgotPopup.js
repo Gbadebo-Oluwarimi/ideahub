@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import '../Styles/ComponentStyles/forgotPopup.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { ForgotPassword } from '../features/Auth/forgotSlice'
@@ -13,10 +13,10 @@ const ForgotPopup = ({ShowPopup}) => {
   //   console.log('okay')
   // }, [isError, isSuccess]);
   const HandleSubmit = () => {
-    if(!email){
-      return <Error msg="The email field is not filled"/>
-    }
-    dispatch(ForgotPassword(email))
+   if(email !== null){
+    console.log(email)
+    dispatch(ForgotPassword({email}))
+   }
   }
 
 
@@ -33,7 +33,7 @@ const ForgotPopup = ({ShowPopup}) => {
       <div className='mb-10'>
         <label className='font-bold p-0 m-0'>Email</label>
         <legend className='mb-2'><small>Enter a valid Email Address</small></legend>
-        <input type="email" value={email}  onChange={(e) => setEmail(e.target.value)} className='input'/>
+        <input type="text" value={email}  onChange={(e) => setEmail(e.target.value)} className='input'/>
         <small>Must include all the symbols</small>
       </div> 
       {isSuccess && <Success msg={msg}/>}
