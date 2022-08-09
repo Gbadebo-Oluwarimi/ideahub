@@ -88,6 +88,7 @@ const forgotPassword = asyncexpress(async(req, res) =>{
 const ResetPassword = asyncexpress(async(req, res) => {
     const{ id, token } = req.params;
     const { password, password2 } = req.body
+    // console.log(req.params, req.body)
     //check if id exists in database
     const user = await Usermodel.findById(id);
     if(!user){
@@ -98,7 +99,7 @@ const ResetPassword = asyncexpress(async(req, res) => {
         try {
             const payload = jwt.verify(token, secret)
             if(password !== password2){
-                res.send({messsage:"The Fields Dosen't match"}).status(301)
+                res.json("The Fields Do Not Match").status(301)
             }else{
     
                 //Hash the password
@@ -108,10 +109,11 @@ const ResetPassword = asyncexpress(async(req, res) => {
             await Usermodel.findByIdAndUpdate(id, {password:hashedpassword});
     
             // await db.mysessions.
-            res.send(user)
+            res.status(201).json("Password Updated Successfully")
             }
         } catch (err) {
-            res.send(err.mesage);
+            res.status(301)
+           throw new Error("Invalid Signature")
             console.log(err.message)
         }// this might be a problem
     }

@@ -14,15 +14,14 @@ const ResetPassword = () => {
 
     const HandleSubmit = () =>{
         if(password !== conPass){
-            return <Error msg={"The two Password fields do not match"}/>
+            return (<Error msg={"The two Password fields do not match"}/>)
         }
         const data = {
             id, token,
-            password
+            password, conPass
         }
         dispatch(Resetpassword(data))
     }
-    console.log(id, token)
   return (
     <div>ResetPassword
 

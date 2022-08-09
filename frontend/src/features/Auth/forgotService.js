@@ -12,7 +12,8 @@ const forgotPassword = async(userdata) => {
 }
 
 const resetPassword = async(userdata) => {
-    const response = await axios.post(`${URL}reset-password/${userdata.id}/${userdata.token}`);
+    const { password, conPass } = userdata
+    const response = await axios.post(`${URL}reset-password/${userdata.id}/${userdata.token}`, {password, password2:conPass});
     if(response.data){
         console.log(response.data)
     }
