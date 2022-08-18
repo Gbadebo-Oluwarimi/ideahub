@@ -4,11 +4,13 @@ const Usermodel = require("../models/User")
 const isAuth = async(req, res, next) => {
     if(req.session.isAuth){
         req.user = await Usermodel.findById(req.session.user).select('-password')
-        // console.log(req.user)
+        if(!req.user){
+            throw new Error('AFBjki;')
+        }
         next()
     }
     else{
-        res.send({message:"Not authorized"})
+      res.json('error').status(401)
     }
 }
 module.exports = isAuth

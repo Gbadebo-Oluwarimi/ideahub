@@ -1,0 +1,48 @@
+.navbar{
+background: rgba(209, 7, 250, 0.068);
+min-width:290px;
+flex: 0 0 200px;
+    @apply inline-block min-h-screen p-4 text-xs justify-start
+}
+.top-nav{
+    @apply flex justify-between align-middle items-center
+}
+.left{
+    @apply flex align-middle items-center
+}
+.icon{
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+    @apply w-10 h-10 rounded-md text-center flex justify-center align-middle items-center mr-2
+}
+.text{
+    @apply inline-block
+}
+.search{
+    background: transparent;
+box-shadow: 0 4px 30px rgba(31, 26, 26, 0.199);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+    @apply mb-7  flex w-full p-2 mt-8 items-center justify-between border-gray-600 rounded-lg
+}
+.text-input{
+    @apply border-none  bg-transparent focus:outline-none
+}
+.noti-1{
+    @apply flex justify-between items-center align-middle pb-1 px-1 py-1.5 hover:rounded-lg hover:bg-gray-200 
+}
+
+
+.second{
+    
+    @apply w-full bg-gray-100
+}
+.con{
+    width:100%;
+    background-color: blueviolet;
+}

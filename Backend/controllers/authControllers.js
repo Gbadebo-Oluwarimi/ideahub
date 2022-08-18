@@ -45,9 +45,10 @@ const LoginController = asyncexpress(async(req, res) => {
             if(isMatch){
                 console.log("Logged in succesfully".green.underline)
 
-                req.session.user = (user._id)
+                req.session.user = (user)
                 req.session.isAuth = true
-                res.redirect('/api/details')
+                res.json(req.session.user);
+                // res.redirect('/api/details')
             }else{
                 res.status(401)
                 throw new Error('password fields do not match')
@@ -65,9 +66,12 @@ const LoginController = asyncexpress(async(req, res) => {
 
 
 const LogoutController = (req, res) => {
+
     req.session.destroy((err) => {
+        res.clearCookie('connect.sid')
         if(err) throw err;
-        res.send({message:"session destroyed"})
+        console.log('Logged out succesfully'.green.underline)
+        res.json("session destroyed")
     })
 }
 

@@ -1,25 +1,31 @@
 import React from 'react'
 import '../Styles/SignUp.css'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../features/Auth/authSlice'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Svg from '../components/Svg'
+import Error from '../components/Error'
 const SignUp = () => {
   const dispatch = useDispatch();
-  
-
+  const navigate = useNavigate();
+  const { signuperror, msg, loading, isSuccess } = useSelector((state) => state.auth)
   const [username, setUser] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPasssword] = useState("")
   const [Password2, setPasssword2] = useState("")
 
+  useEffect(() => {
+    if(isSuccess){
+      navigate('/')
+    }
+  }, [isSuccess, navigate])
   const HandleSubmit =() => {
       const userdata ={ 
         email, username, password
       }
       dispatch(registerUser(userdata))
-    
+
   }
   return (
     <>
@@ -31,6 +37,7 @@ const SignUp = () => {
                 <div className='absolute bg-slate-600 rounded-full w-12 h-12 -top-5'></div>
                   <div className='mt-10 mb-11 text-xl font-poppins font-medium'><h1>Hey, Please SignIn</h1></div>
                   <div className='mb-10'>
+                    {signuperror ? <Error msg={signuperror}/> : null}
                     <label className='font-bold p-0 m-0'>Username</label>
                     <legend className='mb-2'><small>Enter Your Username</small></legend>
                     <input type="text" onChange={(e) => setUser(e.target.value)} value={username} className='input'/>
@@ -60,7 +67,7 @@ const SignUp = () => {
                             <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores libero minima labore nulla Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora quas veniam maiores exercitationem inventore eveniet sapiente quisquam cum,  </small>
                     </div>
                     <div className='submit'>
-                    <button onClick={() => HandleSubmit()}>SignUp</button>
+                    <button onClick={() => HandleSubmit()}>{loading ? 'Signing in ....' : 'Sign in' }</button>
                     </div>
                   </div>
                   </div>

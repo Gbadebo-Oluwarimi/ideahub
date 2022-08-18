@@ -1,31 +1,36 @@
 import React from 'react'
 import '../Styles/Login.css'
-import { useDispatch,} from 'react-redux'
-import {reset} from '../features/Auth/forgotSlice'
-import{ useState } from 'react'
+import { useDispatch, useSelector} from 'react-redux'
+import{ useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { LoginUser } from '../features/Auth/authSlice'
+import { reset } from '../features/Auth/forgotSlice'
+import { useNavigate } from 'react-router-dom'
 import ForgotPopup from '../components/ForgotPopup'
 import Svg from '../components/Svg'
+import Success from '../components/Success'
+import Error from '../components/Error'
+
 
 const Login = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [forgot, setForgot] = useState(false)
-
-
+  const { registereduser, isError, msg, loading } = useSelector((state) => state.auth)
 
   const ShowPopup = () => {
-    console.log(forgot)
     setForgot(!forgot);
-    dispatch(reset())
+    // dispatch(reset())
   }
+
     const HandleSubmit = () => {
       const userdata ={ 
         email, password
       }
-      dispatch(LoginUser(userdata))
+      dispatch(LoginUser(userdata));
+      
     }
   return (
     <>
@@ -37,7 +42,8 @@ const Login = () => {
                 <div className='form'>
                   <div className='absolute bg-slate-600 rounded-full w-12 h-12 -top-5'></div>
                   <div className='mt-10 mb-11 text-xl font-poppins font-medium'><h1>Welcome, Please Login</h1></div>
-                
+                  {isError ? <Error msg={msg}/> : null}
+                  {registereduser ? <Success msg={`${registereduser} account has been created. Login 😎`}/> : null}
                     <div className='mb-10'>
                     <label className='font-bold p-0 m-0'>Email</label>
                     <legend className='mb-2'><small>Enter a valid Email Address</small></legend>
@@ -56,7 +62,7 @@ const Login = () => {
                     </div>
                     <div className='forgot'><small>Forgot Password <b onClick={() => ShowPopup()}><div className='cursor-pointer'>Click Here to Recover</div></b></small></div>
                     <div className='submit'>
-                    <button onClick={() => HandleSubmit()}>Login</button>
+                    <button onClick={() => HandleSubmit()}>{loading ? 'Logging In....': 'Login'}</button>
                     </div>
                   </div>
                   </div>

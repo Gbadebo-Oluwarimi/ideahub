@@ -1,5 +1,5 @@
  const dashboard = (req, res) => {
-    res.json("You are now in the dashboard page")
+    res.json(req.user).status(204)
 }
 
 module.exports = {

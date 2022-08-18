@@ -3,7 +3,7 @@ const colors = require('colors');
 const dotenv = require('dotenv').config()
 const { connectdb } = require('./config.js/db');
 const app = express();
-
+const cors = require('cors');
 const session = require('express-session');
 const { errorHandler } = require('./middleware/errormiddleware');
 const Mongodbsession = require('connect-mongodb-session')(session)
@@ -13,6 +13,8 @@ const Store = new Mongodbsession({
     uri:process.env.MONGO_URI,
     collection:'mysessions'
 })
+
+app.use(cors({ credentials:true }))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(session({
@@ -20,6 +22,7 @@ app.use(session({
     resave:true,
     secret:"asuperimportantsecret",
     store:Store,
+    cookie:{ secure:false, httpOnly:false }
 }))
 const PORT = 5000 || process.env.PORT;
 connectdb();
