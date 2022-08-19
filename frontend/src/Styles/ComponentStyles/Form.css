@@ -5,9 +5,9 @@
     min-height:600px;
     background: rgba(255, 255, 255, 0.774);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.137);
-    border-radius: 8px;
+    border-radius: 3px;
     margin-top:40px;
-    padding:20px;
+    padding:35px;
 }
 .create{
     width:100%;

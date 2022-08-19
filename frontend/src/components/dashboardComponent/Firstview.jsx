@@ -5,7 +5,7 @@ const Firstview = ({popup}) => {
     <div className='main'>
       <div className='main2'>
         <div className='content'>
-         <div className='font-bold text-xl text-gray-600 text-font-jost -mt-6 mb-2'>Welcome to <span className='text-sky-500'>Ideahub</span></div>
+         <div className='font-bold text-xl text-gray-600 text-font-jost -mt-6 mb-2'>Welcome to <span className='text-indigo-500'>Ideahub</span></div>
           <p className=''>Lorem ipsum dolor sit amet consectetur adipisicing elit.tenetur provident ab fugit aliq</p>
         </div>
         <div className='flex gap-4 my-8'>
