@@ -7,6 +7,7 @@ export const getDetails = async() => {
     return response.data;
 }
 
+
 const dashboard = {
     getDetails,
 }

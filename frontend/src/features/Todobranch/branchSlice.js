@@ -1,53 +1,53 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import dashboard from './dashboardService';
+import branch from './branchService';
 
 const initialState = {
     loading:false,
-    Error:false,
+    error:false,
     success:false,
-    load:""
+    load:null
 
 }
 
-export const getAuthUserDashboard = createAsyncThunk('dash/dashboard-auth', async(thunkAPI) => {
+// create todo branch 
+export const createTodoBranch = createAsyncThunk('dash/createtodoBranch', async(userdata, thunkAPI) => {
     try {
-        return await dashboard.getDetails();
+        return await branch.createBranch(userdata);
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message ||error.toString()
         return thunkAPI.rejectWithValue(message)
     }
 })
 
-const dashboardSlice = createSlice({
-    name:"dashboard",
+const branchSlice = createSlice({
+    name:'branch',
     initialState,
     reducers:{
         reset:(state) => {
             state.loading=false
-            state.Error=false
+            state.error=false
             state.success=false
-            state.load=""
-        } 
+            state.load=null
+        }
     },
-    extraReducers:(builder) => {
-        builder.addCase(getAuthUserDashboard.pending, (state) => {
+    extraReducers:(builder) =>{
+        builder.addCase(createTodoBranch.pending, (state) => {
             state.loading=true
         })
-        builder.addCase(getAuthUserDashboard.fulfilled, (state, action) => {
+        builder.addCase(createTodoBranch.fulfilled, (state, action) => {
             state.loading=false
-            state.Error=false
+            state.error=false
             state.success=true
             state.load=action.payload
         })
-        builder.addCase(getAuthUserDashboard.rejected, (state, action) => {
+        builder.addCase(createTodoBranch.rejected, (state, action) => {
             state.loading=false
-            state.Error=true
+            state.error=true
             state.success=false
             state.load=action.payload
         })
-
     }
 })
 
-export const { reset } = dashboardSlice.actions
-export default dashboardSlice.reducer
+export const { reset } = branchSlice.actions
+export default branchSlice.reducer
