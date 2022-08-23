@@ -1,6 +1,19 @@
 import React from 'react'
-
-const Navbar = ({load}) => {
+import { useEffect } from 'react'
+import Branches from '../Branches'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAuthUserInfo } from '../../features/getUser/getUserSlice'
+import { getAuthUserDashboard } from '../../features/Dashboard/dashBoardSlice'
+import { updateState } from '../../features/formState/formSlice'
+import { getAllUserProject } from '../../features/Todobranch/branchSlice'
+const Navbar = () => {
+  const { projects, Error } = useSelector((state) => state.branch);
+  const { User } = useSelector((state) => state.Userinfo)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllUserProject());
+    dispatch(getAuthUserInfo());
+  }, [ dispatch])
   return (
     <div className='flex-2 navbar scrollbar'>
     <div className="top-nav">
@@ -125,32 +138,18 @@ Schedule
 <div className='p-2 text-gray-500 '>
 Projects
 </div>
-<div className='flex items-center p-2 hover:bg-gray-200 rounded-md'>
-<div className='w-4 h-4 rounded-md bg-violet-300 mr-3'>
-</div>
-<div>Developing IdeaHub</div>
-</div>
-
-<div className='flex items-center p-2 hover:bg-gray-200 rounded-md'>
-<div className='w-4 h-4 rounded-md bg-green-600 mr-3'>
-</div>
-<div>Mikrotik</div>
-</div>
+{
+  projects.length > 0 ? (<div>{projects.map((loads) => <Branches title={loads} key={loads._id}/>)}</div>) : <div>Create</div>
+}
 
 
-<div className='flex items-center p-2 hover:bg-gray-200 rounded-md'>
-<div className='w-4 h-4 rounded-md bg-pink-600 mr-3'>
-</div>
-<div>Stuff</div>
-</div>
-
-<div className='flex items-center p-1 mb-3 hover:bg-gray-200 rounded-md'>
+<div className='flex items-center p-1 mb-3 hover:bg-gray-200 rounded-md cursor-pointer' onClick={() => dispatch(updateState())}>
 <div className=''>
 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg>
 </div>
-<div>Add a New Idea</div>
+<div>Add a New Todo Branch</div>
 </div>
 
 
@@ -158,7 +157,7 @@ Projects
 <div className="flex justify-between text-sm items-center p-2 rounded-lg bg-gray-200 mb-1">
             <div className='left'>
               <div className='icon'></div>
-              <div className='text'><div className='font-bold leadin'>{load && load.username}</div><div className='text-xs w-full overflow-hidden'>{load && load.email}</div></div>
+              <div className='text'><div className='font-bold leadin'>{User && User.username}</div><div className='text-xs w-full overflow-hidden'>{User && User.email}</div></div>
             </div>
             <div className='right'><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
 <path fillRule="evenodd" d="M4.293 15.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 0zm0-6a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 5.414 5.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />

@@ -1,4 +1,4 @@
-import react from 'react'
+
 import '../../../Styles/ComponentStyles/Form.css'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,10 +6,12 @@ import { createTodoBranch } from '../../../features/Todobranch/branchSlice'
 import { reset } from '../../../features/Todobranch/branchSlice'
 import { useNavigate } from 'react-router-dom'
 import Error from '../../Error';
-const Formpopup = ({func}) => {
+import { updateState } from '../../../features/formState/formSlice'
+const Formpopup = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { error, load, success } = useSelector((state) => state.branch)
+    const { form } = useSelector((state) => state.formstate)
     const [branch_title, setBranchtitle] = useState('');
     const [branch_purpose, setBranchpurpose] = useState('');
 
@@ -17,24 +19,25 @@ const Formpopup = ({func}) => {
 
     useEffect(() => {
         if(success){
-            navigate('/');
-            dispatch(reset());
+            if(form){
+                dispatch(updateState())
+                dispatch(reset());
+            }
         }
-    }, [navigate,dispatch, success])
+    }, [navigate,dispatch, success, form])
     //function to create the branch
     const createTheBranch = () => {
         const branch = {
             branch_title,
             branch_purpose
         }
-        console.log(branch)
         dispatch(createTodoBranch({branch_title, branch_purpose}));
         
     }
 
     const erase = () => {
         dispatch(reset());
-        func()
+        dispatch(updateState())
     }
 
 

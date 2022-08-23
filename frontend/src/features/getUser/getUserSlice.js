@@ -1,53 +1,53 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import dashboard from './dashboardService';
+import getUserService from './getUserService';
 
 const initialState = {
     loading:false,
     Error:false,
     success:false,
-    load:[]
+    User:null,
 
 }
 
-export const getAuthUserDashboard = createAsyncThunk('dash/dashboard-auth', async(thunkAPI) => {
+export const getAuthUserInfo = createAsyncThunk('get/UserInfo', async(thunkAPI) => {
     try {
-        return await dashboard.getDetails();
+        return await getUserService.getDetails();
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message ||error.toString()
         return thunkAPI.rejectWithValue(message)
     }
 })
 
-const dashboardSlice = createSlice({
-    name:"dashboard",
+const UserInfoSlice = createSlice({
+    name:"User",
     initialState,
     reducers:{
         reset:(state) => {
             state.loading=false
             state.Error=false
             state.success=false
-            state.load=[]
+            state.User=null
         } 
     },
     extraReducers:(builder) => {
-        builder.addCase(getAuthUserDashboard.pending, (state) => {
+        builder.addCase(getAuthUserInfo.pending, (state) => {
             state.loading=true
         })
-        builder.addCase(getAuthUserDashboard.fulfilled, (state, action) => {
+        builder.addCase(getAuthUserInfo.fulfilled, (state, action) => {
             state.loading=false
             state.Error=false
             state.success=true
-            state.load=action.payload
+            state.User=action.payload
         })
-        builder.addCase(getAuthUserDashboard.rejected, (state, action) => {
+        builder.addCase(getAuthUserInfo.rejected, (state, action) => {
             state.loading=false
             state.Error=true
             state.success=false
-            state.load=action.payload
+            state.User=action.payload
         })
 
     }
 })
 
-export const { reset } = dashboardSlice.actions
-export default dashboardSlice.reducer
+export const { reset } = UserInfoSlice.actions
+export default UserInfoSlice.reducer
