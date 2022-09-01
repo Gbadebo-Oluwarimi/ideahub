@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    form:false
+    form:false,
+    todo:false,
 }
 
 const formSlice = createSlice({
@@ -10,9 +11,12 @@ const formSlice = createSlice({
     reducers:{
         updateState:(state) => {
             state.form = !state.form
+        },
+        updateTodoState:(state) => {
+            state.todo = !state.todo
         }
     }
 })
 
-export const { updateState } = formSlice.actions
+export const { updateState, updateTodoState } = formSlice.actions
 export default formSlice.reducer

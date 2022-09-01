@@ -1,6 +1,6 @@
 .navbar{
 padding:1rem;
-@apply  w-80 min-h-screen text-sm overflow-y-auto
+@apply  w-72 min-h-screen text-sm overflow-y-auto
 }
 .top-nav{
     @apply flex justify-between align-middle items-center w-full
@@ -52,6 +52,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 
 ::-webkit-scrollbar {
     width: 14px;
+    position: absolte;
+    right:0;
   }
   
   ::-webkit-scrollbar-track {

@@ -33,5 +33,4 @@ app.listen(PORT, () => {
 
 app.use('/api/auth', require('./routes/authRoutes.js'));
 app.use('/api/details', require('./routes/dashboardRoutes.js'));
-
-app.use(errorHandler)
+app.use(errorHandler);

@@ -6,6 +6,7 @@ import branchReducer from '../features/Todobranch/branchSlice'
 import UserReducer from '../features/getUser/getUserSlice'
 import CheckReducer from '../features/BranchDet/BranchDetSlice'
 import formReducer from '../features/formState/formSlice'
+import getallbranchReducer from '../features/Getbranch/BranchesSlice'
 export const store = configureStore({
   reducer: {
     auth:authReducer,
@@ -15,5 +16,6 @@ export const store = configureStore({
     Userinfo:UserReducer,
     check_branch:CheckReducer,
     formstate:formReducer,
+    get_branch:getallbranchReducer
   },
 });

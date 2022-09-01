@@ -60,6 +60,24 @@ const get_Branch = async(req, res) => {
     }
 
 }
+//get all branch of the user
+const get_particular_branch = async(req, res) => {
+    const { owner } = req.user._id;
+    if(owner){
+        console.log(owner);
+        try {
+        const branches = await Branchmodel.FindById(owner)
+        if(branches) res.status(200).json(branches)
+        else{ res.staus(300).json('No Branches') }
+        }
+        catch (error) {
+            res.json('An Error Occurred').status(400)
+        }
+    }
+}
+
+
+//create a todo under a branch
 
 module.exports = {
     dashboard,
@@ -67,4 +85,5 @@ module.exports = {
     delete_branch,
     getUser,
     get_Branch,
+    get_particular_branch,
 }
