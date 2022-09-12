@@ -133,6 +133,20 @@ const Update_todo = async(req, res) => {
     res.status(400).json('Not Found')
   }
 }
+
+const get_particular_todo = async(req, res) => {
+    const { userid } = req.params
+    console.log(req.params);
+    const found = await Todomodel.findOne({_id:userid})
+    if(found){
+        res.status(200).json(found)
+        // console.log(found);
+      
+    }
+    else{
+        res.status(300).json('No Found');
+    }
+}
 module.exports = {
     dashboard,
     create_branch,
@@ -143,4 +157,5 @@ module.exports = {
     delete_Todo,
     create_Todo,
     getAllTodo,
+    get_particular_todo
 }

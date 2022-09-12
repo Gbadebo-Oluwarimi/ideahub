@@ -1,5 +1,5 @@
 const express = require("express")
-const { dashboard, create_branch, getUser, get_Branch, get_particular_branch,create_Todo, getAllTodo} = require("../controllers/dashboardControllers")
+const { dashboard, create_branch, getUser, get_Branch, get_particular_branch,create_Todo, getAllTodo, get_particular_todo} = require("../controllers/dashboardControllers")
 const isAuth = require("../middleware/auth")
 const routes = express.Router()
 
@@ -9,7 +9,7 @@ routes.get('/user', isAuth, getUser);
 routes.get('/branch', isAuth, get_particular_branch);
 routes.get('/getalltodo/:id', isAuth, getAllTodo);
 routes.post('/todo_create', isAuth, create_Todo)
-
+routes.post('/todo/:userid', isAuth, get_particular_todo)
 routes.get('/:id', isAuth, get_Branch);
 
 

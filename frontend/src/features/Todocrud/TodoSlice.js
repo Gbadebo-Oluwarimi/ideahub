@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import todocreate from './TodoService'
+import  todocreate  from './TodoService'
 
 const initialState = {
     todos:[],
@@ -7,6 +7,7 @@ const initialState = {
     error:false,
     success:false,
     errormsg:"",
+    gettodo:null
 }
 
 export const get_all_todos = createAsyncThunk('get_todos/todos',async(id, thunkAPI) => {
@@ -30,6 +31,17 @@ export const createtodos = createAsyncThunk('create-todo/todos',async(userdata, 
     }
 } )
 
+export const get_particular_todo = createAsyncThunk('get/todo',async(userid, thunkAPI) => {
+    try {
+        return await todocreate.get_Todo(userid);
+    }
+    catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message ||error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+} )
+
+
 
 const TodoSlice = createSlice({
     name:"all_todo",
@@ -40,6 +52,7 @@ const TodoSlice = createSlice({
             state.errormsg=""
             state.loading=false
             state.success=false
+            state.todo=null
         }
     },
     extraReducers:(builder) =>{
@@ -47,7 +60,7 @@ const TodoSlice = createSlice({
             state.loading=true
         })
         builder.addCase(get_all_todos.fulfilled, (state, action) => {
-            console.log(action.payload)
+            // console.log(action.payload)
             state.loading=false
             state.error=false
             state.success=true
@@ -73,6 +86,23 @@ const TodoSlice = createSlice({
 
         })
         builder.addCase(createtodos.rejected, (state, action) => {
+            state.loading=false
+            state.error=true
+            state.success=false
+            state.errormsg = action.payload
+        })
+            // get  a particular todo
+        builder.addCase(get_particular_todo.pending, (state) => {
+            state.loading=true
+        })
+        builder.addCase(get_particular_todo.fulfilled, (state, action) => {
+            state.loading=false
+            state.error=false
+            state.success=true
+            state.gettodo = action.payload
+
+        })
+        builder.addCase(get_particular_todo.rejected, (state, action) => {
             state.loading=false
             state.error=true
             state.success=false

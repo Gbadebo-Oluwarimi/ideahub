@@ -12,11 +12,12 @@ import Navbar from '../components/dashboardComponent/Navbar'
 import Firstview from '../components/dashboardComponent/Firstview'
 import Formpopup from '../components/dashboardComponent/Popups/Formpopup'
 import { getAuthUserInfo } from '../features/getUser/getUserSlice'
+import Editpopup from '../components/dashboardComponent/Popups/Editpopup'
 const Dashboard = () => {
   const dispatch =useDispatch();
   // const navigate = useNavigate();
   // const { load, Error } = useSelector((state) => state.dashboard)
-  const {form} = useSelector((state) => state.formstate)
+  const {form,edit} = useSelector((state) => state.formstate)
   // const { User } = useSelector((state) => state.Userinfo)
 
   useEffect(() =>{
