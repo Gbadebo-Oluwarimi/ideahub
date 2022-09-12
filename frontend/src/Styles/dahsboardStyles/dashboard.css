@@ -1,6 +1,7 @@
 .navbar{
 padding:1rem;
-@apply  w-72 min-h-screen text-sm overflow-y-auto
+width:17.5rem;
+@apply  min-h-screen text-xs overflow-y-auto
 }
 .top-nav{
     @apply flex justify-between align-middle items-center w-full

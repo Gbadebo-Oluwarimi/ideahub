@@ -8,7 +8,7 @@ const initialState = {
     success:null
 }
 
-export const get_all_branches = createAsyncThunk('get_branch/branch',async(thunkAPI) => {
+export const get_all_branches = createAsyncThunk('get_branch/branch',async(_, thunkAPI) => {
     try {
         return await branches.getbranches();
     }
@@ -22,8 +22,8 @@ const GetAllBranchSlice = createSlice({
     name:"all_branches",
     initialState,
     reducers:{
-        reset:(state) => {
-            state.todobranches = []
+        resety:(state) => {
+            state.todobranches=[]
             state.error=null
             state.loading=false
             state.success=null
@@ -37,7 +37,7 @@ const GetAllBranchSlice = createSlice({
             state.loading=false
             state.error=false
             state.success=true
-            state.todobranches.push(action.payload)
+            state.todobranches = action.payload
         })
         builder.addCase(get_all_branches.rejected, (state, action) => {
             state.loading=false
@@ -49,5 +49,5 @@ const GetAllBranchSlice = createSlice({
 
 })
 
-export const { reset } = GetAllBranchSlice.actions
+export const { resety } = GetAllBranchSlice.actions
 export default GetAllBranchSlice.reducer

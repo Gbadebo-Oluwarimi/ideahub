@@ -10,15 +10,13 @@ import PublicRoutes from './utils/PublicRoutes';
 import Project from './pages/Project';
 import { useSelector } from 'react-redux';
 import Formpopup from '../src/components/dashboardComponent/Popups/Formpopup'
-import Todopopup from './components/dashboardComponent/Popups/Todopopup';
 
 function App() {
 
-  const {form, todo} = useSelector((state) => state.formstate)
+  const {form} = useSelector((state) => state.formstate)
   return (
     <>
    {form && <Formpopup/>}
-   {todo && <Todopopup/>}
       <Routes>
         <Route element={<PublicRoutes/>}>
             <Route element={<Login/>} path="/"/>

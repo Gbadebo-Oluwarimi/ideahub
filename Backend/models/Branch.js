@@ -9,10 +9,10 @@ const BranchSchema = new mongoose.Schema({
         type:String,
     },
     branch_owner:{
-         type: mongoose.Schema.ObjectId,
+         type:mongoose.SchemaTypes.ObjectId,
           ref: 'User' ,
     },
 
 }, {timestamps:true}) 
 
-module.exports = mongoose.model('Todo_Branch', BranchSchema);
+module.exports = mongoose.model('Todobranch', BranchSchema);
