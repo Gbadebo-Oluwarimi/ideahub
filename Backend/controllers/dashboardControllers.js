@@ -101,9 +101,10 @@ const create_Todo = async(req, res) => {
 
 //delete a todo
 
-const delete_Todo = (req, res) => {
+const delete_Todo = async(req, res) => {
     const { Todo_id } = req.body;
-    const Todo = Todomodel.findByIdAndDelete({Todo_id});
+    console.log(req.body)
+    const Todo = await Todomodel.findByIdAndDelete(Todo_id);
     if(!Todo){
         throw new Error('An Error Occured While Deleting the file')
     }
@@ -125,9 +126,11 @@ const getAllTodo = async(req, res) => {
 //update a particular todo
 const Update_todo = async(req, res) => {
     const { id } = req.params
-    const { Todo_status, Todo_description, Todo_title } = req.body
-  const found = await Todomodel.findByIdAndUpdate({_id:id}, {Todo_status, Todo_description, Todo_title})
-  if(found == true){
+    // console.log(req.params)
+    // console.log(req.body)
+    const { status, description, title } = req.body
+  const found = await Todomodel.findByIdAndUpdate({_id:id}, {Todo_status:status, Todo_description:description, Todo_title:title})
+  if(found){
     res.status(200).json(`${found.Todo_title} Has been Updated Successfully`)
   }else{
     res.status(400).json('Not Found')
@@ -157,5 +160,6 @@ module.exports = {
     delete_Todo,
     create_Todo,
     getAllTodo,
+    Update_todo,
     get_particular_todo
 }

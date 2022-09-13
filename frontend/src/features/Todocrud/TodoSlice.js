@@ -6,6 +6,7 @@ const initialState = {
     loading:false,
     error:false,
     success:false,
+    successmsg:"",
     errormsg:"",
     gettodo:null
 }
@@ -41,6 +42,29 @@ export const get_particular_todo = createAsyncThunk('get/todo',async(userid, thu
     }
 } )
 
+export const update_particular_todo = createAsyncThunk('update/todo',async(userdata, thunkAPI) => {
+    try {
+        console.log(userdata)
+        return await todocreate.update_todo(userdata);
+    }
+    catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message ||error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+} )
+
+export const delete_particular_todo = createAsyncThunk('delete/todo',async(userid, thunkAPI) => {
+    try {
+        console.log(userid)
+        return await todocreate.delete_todo(userid);
+    }
+    catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message ||error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+} )
+
+
 
 
 const TodoSlice = createSlice({
@@ -52,8 +76,32 @@ const TodoSlice = createSlice({
             state.errormsg=""
             state.loading=false
             state.success=false
-            state.todo=null
-        }
+            state.gettodo=null
+            state.successmsg=""
+        },
+        deleteTodo: (state, action) => {
+            const { id } = action.payload
+            // console.log(id)
+            const usertodelete = state.todos.map((todo) => console.log(todo._id))
+            if(usertodelete){
+                // console.log('reached')
+                state.todos.splice(state.todos.findIndex((todo) => todo._id === id),1);
+            }
+          },
+        updateTodo: (state, action) => {
+            const {id, title, description, status} = action.payload
+            const updateuser = state.todos.find(todo => todo._id === id)
+            if(updateuser){
+                updateuser.Todo_title =title
+                updateuser.Todo_description = description
+                updateuser.Todo_status=status
+            }
+          },
+          addTodo:(state, action) => {
+            const { id, Todo_title, Todo_description } = action.payload
+            state.todos.push({_id:id, Todo_description, Todo_title});
+          }
+
     },
     extraReducers:(builder) =>{
         builder.addCase(get_all_todos.pending, (state) => {
@@ -109,9 +157,45 @@ const TodoSlice = createSlice({
             state.errormsg = action.payload
         })
 
+
+        //update a particular todo
+        builder.addCase(update_particular_todo.pending, (state) => {
+            state.loading=true
+        })
+        builder.addCase(update_particular_todo.fulfilled, (state, action) => {
+            state.loading=false
+            state.error=false
+            state.success=true
+            state.successmsg = action.payload
+
+        })
+        builder.addCase(update_particular_todo.rejected, (state, action) => {
+            state.loading=false
+            state.error=true
+            state.success=false
+            state.errormsg = action.payload
+        })
+
+        // delete a particular todo
+        builder.addCase(delete_particular_todo.pending, (state) => {
+            state.loading=true
+        })
+        builder.addCase(delete_particular_todo.fulfilled, (state, action) => {
+            state.loading=false
+            state.error=false
+            state.success=true
+            state.successmsg = action.payload
+
+        })
+        builder.addCase(delete_particular_todo.rejected, (state, action) => {
+            state.loading=false
+            state.error=true
+            state.success=false
+            state.errormsg = action.payload
+        })
     }
 
 })
 
-export const { resety } = TodoSlice.actions
+export const { resety, deleteTodo, updateTodo, addTodo } = TodoSlice.actions
 export default TodoSlice.reducer

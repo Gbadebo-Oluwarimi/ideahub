@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTodoState, updateEditState } from '../features/formState/formSlice';
 import { checkBranch } from '../features/BranchDet/BranchDetSlice';
-import { createtodos, get_all_todos, get_particular_todo } from '../features/Todocrud/TodoSlice';
+import { addTodo, createtodos, deleteTodo, delete_particular_todo, get_all_todos, get_particular_todo } from '../features/Todocrud/TodoSlice';
 import Todopopup from '../components/dashboardComponent/Popups/Todopopup';
 import Navbar from '../components/dashboardComponent/Navbar';
 import Editpopup from '../components/dashboardComponent/Popups/Editpopup';
@@ -14,7 +14,9 @@ const Project = () => {
     const { todos} = useSelector((state) => state.todos)
     const sendy = (Todo_title, Todo_description) => {
       // console.log(id)
+      // dispatch(addTodo({id, Todo_description, Todo_title}))
           dispatch(createtodos({Todo_description, Todo_title, Todo_branch_id:id}))
+
     }
     const dispatch = useDispatch()
     const { load} = useSelector((state) => state.check_branch)
@@ -25,6 +27,11 @@ const Project = () => {
     const get = (id) => {
       dispatch(get_particular_todo(id))
       dispatch(updateEditState())
+    }
+    const wipeout = (id) => {
+      console.log(id)
+      dispatch(deleteTodo({id}))
+      dispatch(delete_particular_todo(id))
     }
   return (
     <>
@@ -106,7 +113,7 @@ const Project = () => {
       <th className='w-56'>Task 📝  </th>
       <th className='w-56'>Status </th>
       <th className='w-56'>Deadline ⏲ </th>
-      <th>Action</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody className='divide-y divide-gray-200'>
@@ -117,7 +124,7 @@ const Project = () => {
     </td>
     <td>The Eagles</td>
     <td>1972</td>
-    <td> <div className='p-1 rounded-full w-24 text-xs text-center bg-yellow-100 text-yellow-600'>{todo.Todo_status}</div></td>
+    <td>{todo.Todo_status === 'Pending' ? <div className='p-1 rounded-full w-24 text-xs text-center bg-yellow-100 text-yellow-600'>{todo.Todo_status}</div> : <div className='p-1 rounded-full w-24 text-xs text-center bg-green-100 text-green-600'>{todo.Todo_status}</div>}</td>
     <td>Stuffs</td>
     <td className='w-24 items-center text-center'>
       <div className='flex justify-between items-center text-center'>
@@ -127,24 +134,13 @@ const Project = () => {
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-6 h-6 text-sky-700 cursor-pointer bg-sky-100 rounded-full p-1">
   <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
 </svg>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-6 h-6 text-red-400 cursor-pointer bg-red-100 rounded-full p-1">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} onClick={() => wipeout(todo._id)} stroke="currentColor" className="w-6 h-6 text-red-400 cursor-pointer bg-red-100 rounded-full p-1">
   <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
 </svg>
 </div>
     </td>
    </tr>)) : (<div className="font-2xl text-center m-auto max-w-3xl">No Todo Created Create One</div>)}
-    <tr>
-    <td className='inline-block my-2'>
-      <div className="font-bold">Malcolm Lockyer</div>
-      <div className='text-sm'>A little drift</div>
-      </td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-      <td> <div className='text-xs p-1 rounded-full w-24 text-center bg-green-100 text-green-600'>Completed</div></td>
-      <td>Stuff</td>
-      <td>Stuff</td>
-    </tr>
-   
+    
   
     
   </tbody>

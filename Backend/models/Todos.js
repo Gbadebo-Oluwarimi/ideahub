@@ -13,6 +13,10 @@ const TodoSchema = new mongoose.Schema({
         enum: ['Pending', 'Completed', 'Destroyed'],
         default:'Pending'
     },
+    Todo_important:{
+        type:Boolean,
+        default:false,
+    },
     // Todo_branch_title:{
     //     type:String,
     //     required:true,

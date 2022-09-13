@@ -27,10 +27,10 @@ const Formpopup = () => {
     }, [navigate,dispatch, success, form])
     //function to create the branch
     const createTheBranch = () => {
-        const branch = {
-            branch_title,
-            branch_purpose
-        }
+        // const branch = {
+        //     branch_title,
+        //     branch_purpose
+        // }
         dispatch(createTodoBranch({branch_title, branch_purpose}));
         
     }

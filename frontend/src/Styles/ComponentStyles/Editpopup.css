@@ -1,3 +1,19 @@
 .todo-form{
-    
+    background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+position: fixed;
+width:100%;
+min-height: 100vh;
+margin:0;
+z-index:10
+}
+.todo-form2{
+    position:relative;
+    min-height:60vh;
+    width:10rem;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    @apply bg-white m-auto rounded-sm mt-10 w-2/4 p-3 font-poppins
 }

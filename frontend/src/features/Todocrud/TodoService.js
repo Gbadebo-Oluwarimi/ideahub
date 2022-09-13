@@ -15,15 +15,30 @@ export const gettodos = async(id) => {
     return response.data
 }
 export const get_Todo = async(userid) => {
-  console.log(userid);
+  // console.log(userid);
   const response = await axios.post(`${API_URL}/todo/${userid}`)
-  console.log(response.data)
+  // console.log(response.data)
+  return response.data
+}
+
+export const update_todo = async(userdata) => {
+  console.log(userdata)
+  const id = await userdata.id
+  const response = await axios.post(`${API_URL}/todo-update/${id}`, userdata)
+  return response.data
+}
+
+export const delete_todo = async(userid) => {
+  console.log(userid)
+  const response = await axios.post(`${API_URL}/todo-delete`, {Todo_id:userid})
   return response.data
 }
 
 const todocreate = {
   create_Todo,
   gettodos,
-  get_Todo
+  get_Todo,
+  update_todo,
+  delete_todo
 }
 export default todocreate;
