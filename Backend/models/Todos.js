@@ -10,7 +10,7 @@ const TodoSchema = new mongoose.Schema({
     },
     Todo_status:{
         type:String,
-        enum: ['Pending', 'Completed', 'Destroyed'],
+        enum: ['Pending', 'Fulfilled', 'Destroyed'],
         default:'Pending'
     },
     Todo_important:{

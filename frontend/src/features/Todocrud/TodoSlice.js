@@ -7,6 +7,7 @@ const initialState = {
     error:false,
     success:false,
     successmsg:"",
+    completed:null,
     errormsg:"",
     gettodo:null
 }
@@ -100,7 +101,7 @@ const TodoSlice = createSlice({
           addTodo:(state, action) => {
             const { id, Todo_title, Todo_description } = action.payload
             state.todos.push({_id:id, Todo_description, Todo_title});
-          }
+          },
 
     },
     extraReducers:(builder) =>{
@@ -197,5 +198,5 @@ const TodoSlice = createSlice({
 
 })
 
-export const { resety, deleteTodo, updateTodo, addTodo } = TodoSlice.actions
+export const { resety, deleteTodo, updateTodo, addTodo,} = TodoSlice.actions
 export default TodoSlice.reducer

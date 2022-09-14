@@ -4,17 +4,16 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTodoState, updateEditState } from '../features/formState/formSlice';
 import { checkBranch } from '../features/BranchDet/BranchDetSlice';
-import { addTodo, createtodos, deleteTodo, delete_particular_todo, get_all_todos, get_particular_todo } from '../features/Todocrud/TodoSlice';
+import {  checkCompleted, createtodos, deleteTodo, delete_particular_todo, get_all_todos, get_particular_todo } from '../features/Todocrud/TodoSlice';
 import Todopopup from '../components/dashboardComponent/Popups/Todopopup';
 import Navbar from '../components/dashboardComponent/Navbar';
 import Editpopup from '../components/dashboardComponent/Popups/Editpopup';
 const Project = () => {
     const { id } = useParams();
     const {todo, edit} = useSelector((state) => state.formstate)
-    const { todos} = useSelector((state) => state.todos)
+    const { todos, completed} = useSelector((state) => state.todos)
     const sendy = (Todo_title, Todo_description) => {
-      // console.log(id)
-      // dispatch(addTodo({id, Todo_description, Todo_title}))
+   
           dispatch(createtodos({Todo_description, Todo_title, Todo_branch_id:id}))
 
     }
@@ -29,7 +28,7 @@ const Project = () => {
       dispatch(updateEditState())
     }
     const wipeout = (id) => {
-      console.log(id)
+      // console.log(id)
       dispatch(deleteTodo({id}))
       dispatch(delete_particular_todo(id))
     }
@@ -74,12 +73,12 @@ const Project = () => {
               <div className=''>User</div>
             </div>
             <div className='inline-block mr-10'>
-              <div className='font-bold text-sm'>12th Jan 2020</div>
+              <div className='font-bold text-sm'>{new Date(load && load.createdAt).toDateString()}</div>
               <div className=''>Start Date</div>
             </div>
 
             <div className='inline-block mr-10'>
-              <div className='font-bold text-sm'>0</div>
+              <div className='font-bold text-sm'>{completed && completed}</div>
               <div className=''>Completed 🏹 </div>
             </div>
 
