@@ -16,9 +16,14 @@ export const getDetails = async() => {
     return response.data;
 }
 
-
+export const delete_Branch = async(userdata) => {
+    console.log(userdata)
+    const response = await axios.post(`${API_URL}/delete-branch/${userdata}`);
+    return response.data
+}
 const branch = {
     createBranch,
-    getDetails
+    getDetails,
+    delete_Branch
 }
 export default branch;

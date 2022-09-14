@@ -39,15 +39,18 @@ const create_branch = asyncHandler(async(req, res) => {
 })
 // update the todo branch
 
-const delete_branch = (req, res) => {
-    const { branch_id } = req.body;
-    const branch = Branchmodel.findByIdAndDelete({branch_id});
-    if(!branch){
-        throw new Error('An Error Occured While Deleting the file')
-    }
-    res.status(201).json('Branch Deleted Succesfully')
+const delete_branch = asyncHandler(async(req, res) => {
+    const { branch_id } = req.params;
+    // console.log(req.params, 'reacehd');
+    const todos_to_be_deleted = await Todomodel.deleteMany({todo_branch_id:branch_id});
+    // console.log(todos_to_be_deleted);
+   await Branchmodel.findByIdAndDelete(branch_id).then(() => res.status(200).json('Branch Deleted successfully'))
+    .catch((error) => {
+        throw new Error('Could not delete the branch ');
+        res.status(300)
+    })
 
-}
+})
 
 //get a particular branch
 const get_Branch = async(req, res) => {
