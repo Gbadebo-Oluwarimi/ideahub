@@ -9,7 +9,7 @@ console.log(currentDate);
 
 //function to check the database for any reminder emails that need to be sent
 nodeCron.schedule('0 0 0 * * *', async() => {
-    console.log('ran')
+    console.log('ran');
 
     await Todomodel.find({notification_date:date1, status:'Pending'}).then((data) => {
         if(data){
