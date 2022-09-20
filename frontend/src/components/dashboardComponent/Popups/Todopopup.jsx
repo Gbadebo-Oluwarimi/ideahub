@@ -8,12 +8,13 @@ const Todopopup = ({func}) => {
     const dispatch = useDispatch()
     const [ Todo_title, setTodo_title ] = useState("")
     const [ Todo_description, setTodo_description ] = useState("")
+    const [ Todo_deadline, setTodo_deadline] = useState("");
     const resetState = () => {
         dispatch(updateTodoState());
         dispatch(resety())
     }
     const send = () => {
-        func(Todo_title, Todo_description)
+        func(Todo_title, Todo_description, Todo_deadline);
         dispatch(updateTodoState());
     }
 
@@ -37,6 +38,11 @@ const Todopopup = ({func}) => {
                 <div className='font-semibold mt-2 mb-2 text-sm'>Todo Description</div>
                 <textarea className='w-full outline-none ring-2 transition ease-in-out duration-300 text-sm mt-1 focus:ring-indigo-500 p-2 border-gray-300 border  rounded-md h-36' type="message" placeholder='Enter s Todo description.....' value={Todo_description} onChange={(e) => setTodo_description(e.target.value)}/>
                 <span className='text-xs'>Create a valid todo Description *</span>
+            </div>
+            <div className='block w-full'>
+                <div className='font-semibold mt-2 text-sm'>Todo Deadline</div>
+                <span className='text-xs text-red-300 '>Not required *</span>
+                <input className='w-full outline-none ring-2 transition ease-in-out duration-300 text-sm mt-1 focus:ring-indigo-500 p-2 border-gray-300 border  rounded-md' type="date" value={Todo_deadline} onChange={(e) => setTodo_deadline(e.target.value)}/>
             </div>
             {/* <div className='block w-full'>
                 <div className='font-semibold my-2'>Todo Branch</div>

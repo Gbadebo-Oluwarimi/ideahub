@@ -81,19 +81,19 @@ const get_particular_branch = async(req, res) => {
 
 //create a todo under a branch
 const create_Todo = async(req, res) => {
-    const { Todo_title, Todo_description,Todo_branch_id} = req.body
-    // console.log(req.body)
+    const { Todo_title, Todo_description,Todo_branch_id,Todo_deadline} = req.body
+    console.log(req.body)
     try {
         // console.log('ran2')
         if(!Todo_title || !Todo_description || !Todo_branch_id){
           res.status(300)
-          throw new Error('All fields are reqiuired')
+          throw new Error('All fields are required')
         }else{
             await Todomodel.create({
-                Todo_title,Todo_description,todo_branch_id:Todo_branch_id
+                Todo_title,Todo_description,todo_branch_id:Todo_branch_id, Todo_deadline
             }).then((data) => {
                res.status(200).json(data)
-                console.log('saved succesfully')
+                console.log('saved succesfully', data)
             });
         }
     } catch (error) {
@@ -153,6 +153,12 @@ const get_particular_todo = async(req, res) => {
         res.status(300).json('No Found');
     }
 }
+ const get_all_completed_todos = asyncHandler(async(req, res) => {
+
+})
+ const get_all_InProgress_todos = asyncHandler(async(req, res) => {
+
+})
 module.exports = {
     dashboard,
     create_branch,
@@ -164,5 +170,7 @@ module.exports = {
     create_Todo,
     getAllTodo,
     Update_todo,
-    get_particular_todo
+    get_particular_todo,
+    get_all_InProgress_todos,
+    get_all_completed_todos
 }

@@ -10,7 +10,7 @@ const Branches = ({title}) => {
     dispatch(deleteBranch({id:title._id}))
     console.log('ran')
     dispatch(delete_branch(title._id));
-    navigate(-1);
+    navigate('/Dashboard');
   }
   return (
     <div>

@@ -1,6 +1,8 @@
 const express =require('express')
 const colors = require('colors');
 const dotenv = require('dotenv').config()
+const morgan = require('morgan')
+const lodash = require('lodash')
 const { connectdb } = require('./config.js/db');
 const app = express();
 const cors = require('cors');
@@ -15,6 +17,7 @@ const Store = new Mongodbsession({
 })
 
 app.use(cors({ credentials:true }))
+app.use(morgan('dev'));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(session({
@@ -29,7 +32,6 @@ connectdb();
 app.listen(PORT, () => {
     console.log(`Server Started at ${PORT} 🚀 🚀` .cyan.underline)
 })
-
 
 app.use('/api/auth', require('./routes/authRoutes.js'));
 app.use('/api/details', require('./routes/dashboardRoutes.js'));

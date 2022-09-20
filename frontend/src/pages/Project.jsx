@@ -12,9 +12,9 @@ const Project = () => {
     const { id } = useParams();
     const {todo, edit} = useSelector((state) => state.formstate)
     const { todos, completed} = useSelector((state) => state.todos)
-    const sendy = (Todo_title, Todo_description) => {
+    const sendy = (Todo_title, Todo_description, Todo_deadline) => {
    
-          dispatch(createtodos({Todo_description, Todo_title, Todo_branch_id:id}))
+          dispatch(createtodos({Todo_description, Todo_title, Todo_branch_id:id, Todo_deadline}))
 
     }
     const dispatch = useDispatch()
@@ -124,7 +124,7 @@ const Project = () => {
     <td>The Eagles</td>
     <td>1972</td>
     <td>{todo.Todo_status === 'Pending' ? <div className='p-1 rounded-full w-24 text-xs text-center bg-yellow-100 text-yellow-600'>{todo.Todo_status}</div> : <div className='p-1 rounded-full w-24 text-xs text-center bg-green-100 text-green-600'>{todo.Todo_status}</div>}</td>
-    <td>Stuffs</td>
+    <td className='text-gray-500 font-bold'>{new Date(todo.Todo_deadline).toDateString()}</td>
     <td className='w-24 items-center text-center'>
       <div className='flex justify-between items-center text-center'>
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" onClick={() => get(todo._id)} viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-6 h-6 text-sky-700 cursor-pointer bg-sky-100 rounded-full p-1">
