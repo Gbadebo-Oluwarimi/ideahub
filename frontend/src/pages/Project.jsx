@@ -44,7 +44,7 @@ const Project = () => {
           <div className='flex align-middle items-center justify-between'>
           <div className='flex align-middle w-90 items-center'>
               <div className='text-center font-bold text-2xl tracking-tight mr-4'><h1>{ load && load.branch_title }</h1></div>
-              <div className=' border border-violet-300 border-blur    flex justify-between items-center align-middle bg-indigo-400 rounded-md bg-opacity-20 text-xs'><div className='w-40 inline-block p-3'><div>Project Stage</div><span className='font-bold text-sm'>Main Request</span></div>
+              <div className=' border border-yellow-300 border-blur    flex justify-between items-center align-middle bg-yellow-400 rounded-md bg-opacity-20 text-xs'><div className='w-40 inline-block p-3'><div>Project Stage</div><span className='font-bold text-sm'>Still Opened</span></div>
               <div className='p-3'><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
   <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
   <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
@@ -109,7 +109,6 @@ const Project = () => {
     <tr className='rounded-sm p-2 w-full '>
       <th className='py-3 w-1/4'>Task 🏹 </th>
       <th className=' scale-10 sm:w-1/5 px-2'>Progress 📊 </th>
-      <th className='w-56'>Task 📝  </th>
       <th className='w-56'>Status </th>
       <th className='w-56'>Deadline ⏲ </th>
       <th>Actions</th>
@@ -122,8 +121,7 @@ const Project = () => {
       <div className='text-xs'>{todo.Todo_description}</div>
     </td>
     <td>The Eagles</td>
-    <td>1972</td>
-    <td>{todo.Todo_status === 'Pending' ? <div className='p-1 rounded-full w-24 text-xs text-center bg-yellow-100 text-yellow-600'>{todo.Todo_status}</div> : <div className='p-1 rounded-full w-24 text-xs text-center bg-green-100 text-green-600'>{todo.Todo_status}</div>}</td>
+    <td>{todo.Todo_status === 'Pending' ? <div className='p-1 rounded-md w-24 text-xs text-center bg-yellow-100 text-yellow-600'>{todo.Todo_status}</div> : <div className='p-1 rounded-md w-24 text-xs text-center bg-green-100 text-green-600'>{todo.Todo_status}</div>}</td>
     <td className='text-gray-500 font-bold'>{new Date(todo.Todo_deadline).toDateString()}</td>
     <td className='w-24 items-center text-center'>
       <div className='flex justify-between items-center text-center'>
