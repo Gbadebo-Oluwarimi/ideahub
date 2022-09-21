@@ -146,6 +146,15 @@ const Project = () => {
 
       
     </div>
+    <div className="w-72 p-4">
+      <div className='w-full min-h-max bg-yellow-100 border border-yellow-500 rounded-md p-2'>
+        <span className='text-xs font-semibold py-2'>🌊  New Update to our Ui</span>
+        <div style={{fontSize:"11px"}} className="mt-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ab culpa Consectetur ut, est possimus dolorum deleniti earum, s
+        </div>
+      <button className='bg-sky-300 p-1 text-sky-800 rounded-sm mt-2 px-4 text-sm'>Button</button>
+      </div>
+    </div>
     </div>
        </>
   )

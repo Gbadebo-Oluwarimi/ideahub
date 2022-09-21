@@ -8,6 +8,7 @@ const app = express();
 const cors = require('cors');
 const session = require('express-session');
 const { errorHandler } = require('./middleware/errormiddleware');
+const checkRemEmails = require('./Functions/SendremMails');
 const Mongodbsession = require('connect-mongodb-session')(session)
 
 
@@ -15,7 +16,7 @@ const Store = new Mongodbsession({
     uri:process.env.MONGO_URI,
     collection:'mysessions'
 })
-
+checkRemEmails();
 app.use(cors({ credentials:true }))
 app.use(morgan('dev'));
 app.use(express.json())

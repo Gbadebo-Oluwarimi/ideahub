@@ -1,5 +1,6 @@
 const sgMail = require('@sendgrid/mail');
-const Todomodel = require('../models/Todos')
+const Todomodel = require('../models/Todos');
+const nodeCron = require('node-cron')
 const API_KEY = process.env.API_GRID;
 sgMail.setApiKey(API_KEY);
 
@@ -9,7 +10,7 @@ console.log(currentDate);
 
 //function to check the database for any reminder emails that need to be sent
 // it sends them in bulk 
-nodeCron.schedule('0 0 0 * * *', async() => {
+ const checkRemEmails = () => {nodeCron.schedule('0 0 0 * * *', async() => {
     console.log('ran');
 
     await Todomodel.find({Todo_deadline:currentDate, Todo_status:'Pending'}).then((data) => {
@@ -34,3 +35,6 @@ nodeCron.schedule('0 0 0 * * *', async() => {
         }
     });
  });
+}
+
+module.exports=checkRemEmails

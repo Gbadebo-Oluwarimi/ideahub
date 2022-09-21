@@ -1,6 +1,6 @@
 .navbar{
 padding:1rem;
-width:17.5rem;
+width:16.8rem;
 @apply  min-h-screen text-xs overflow-y-auto
 }
 .top-nav{
