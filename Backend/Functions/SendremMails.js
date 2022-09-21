@@ -24,7 +24,7 @@ nodeCron.schedule('0 0 0 * * *', async() => {
                    },
                    to:`${data[i].User_Email}`,
                    subject:`${data[i].title} Notification date has been reached`,
-                   html:`<${data[i].title} invoice Notification date ${data[i].notification_date}`
+                   html:`<${data[i].title} Deadline has been reached ${data[i].notification_date}`
                }
                sgMail.send(message).then(()=> console.log(`Email Sent for Main User${data[i].User_Email} ....... `))
                .catch((err) => console.log(err));
