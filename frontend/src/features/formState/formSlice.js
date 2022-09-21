@@ -4,6 +4,7 @@ const initialState = {
     form:false,
     todo:false,
     edit:false,
+    notification:false,
 }
 
 const formSlice = createSlice({
@@ -18,9 +19,12 @@ const formSlice = createSlice({
         },
         updateEditState:(state) => {
             state.edit = !state.edit
+        },
+        updatenotificationState:(state) => {
+            state.notification = !state.notification
         }
     }
 })
 
-export const { updateState, updateTodoState, updateEditState } = formSlice.actions
+export const { updateState, updateTodoState, updateEditState, updatenotificationState } = formSlice.actions
 export default formSlice.reducer

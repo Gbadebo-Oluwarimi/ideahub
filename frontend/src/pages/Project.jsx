@@ -8,9 +8,10 @@ import {  checkCompleted, createtodos, deleteTodo, delete_particular_todo, get_a
 import Todopopup from '../components/dashboardComponent/Popups/Todopopup';
 import Navbar from '../components/dashboardComponent/Navbar';
 import Editpopup from '../components/dashboardComponent/Popups/Editpopup';
+import Warningpopup from '../components/dashboardComponent/Warningpopup';
 const Project = () => {
     const { id } = useParams();
-    const {todo, edit} = useSelector((state) => state.formstate)
+    const {todo, edit, notification} = useSelector((state) => state.formstate)
     const { todos, completed} = useSelector((state) => state.todos)
     const sendy = (Todo_title, Todo_description, Todo_deadline) => {
    
@@ -39,6 +40,7 @@ const Project = () => {
     <div className='flex flex-column h-screen font-poppins bg-white text-gray-700'>
     <Navbar/>
     <div className='flex-1 overflow-y-auto w-60 bg-white'>
+      <div>{notification ? <Warningpopup msg={"All Info Corrected "}/> : null}</div>
       <div className='w-full bg-slate-50 border-b  p-3 mb-3' style={{height:'18rem'}}>
         <div className='pl-4 pt-2'>
           <div className='flex align-middle items-center justify-between'>
@@ -146,13 +148,13 @@ const Project = () => {
 
       
     </div>
-    <div className="w-72 p-4">
+    <div className="w-72 p-4 ">
       <div className='w-full min-h-max bg-yellow-100 border border-yellow-500 rounded-md p-2'>
         <span className='text-xs font-semibold py-2'>🌊  New Update to our Ui</span>
         <div style={{fontSize:"11px"}} className="mt-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ab culpa Consectetur ut, est possimus dolorum deleniti earum, s
         </div>
-      <button className='bg-sky-300 p-1 text-sky-800 rounded-sm mt-2 px-4 text-sm'>Button</button>
+      <button className='bg-sky-500 w-full p-1 text-sky-800 rounded-sm mt-2 px-4 text-sm'>View </button>
       </div>
     </div>
     </div>
