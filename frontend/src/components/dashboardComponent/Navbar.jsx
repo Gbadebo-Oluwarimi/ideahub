@@ -1,19 +1,28 @@
 import React from 'react'
 import { useEffect } from 'react'
 import Branches from '../Branches'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAuthUserInfo } from '../../features/getUser/getUserSlice'
 import { getAuthUserDashboard } from '../../features/Dashboard/dashBoardSlice'
 import { updateState } from '../../features/formState/formSlice'
 import { getAllUserProject } from '../../features/Todobranch/branchSlice'
+import { Logoutuser, resetState } from '../../features/Auth/authSlice'
 const Navbar = () => {
   const { projects, Error } = useSelector((state) => state.branch);
   const { User } = useSelector((state) => state.Userinfo)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getAllUserProject());
     dispatch(getAuthUserInfo());
   }, [ dispatch])
+  const logout = () => {
+    dispatch(Logoutuser());
+    dispatch(resetState());
+    navigate('/');
+    
+  }
   return (
     <div className='flex-2 navbar scrollbar'>
     <div className="top-nav">
@@ -43,19 +52,19 @@ const Navbar = () => {
 
 
 <div>
-         <div className='noti-1'>  
+         <div className='noti-1  hover:bg-sky-200'>  
        <div className='flex'>
          <div className=''>
-     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-3 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
      <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
      </svg>
          </div>
-         <div className='font-bold text-gray-800'>
+         <div className=' text-sky-800'>
     Groups
          </div>
          </div>
        <div>
-       <svg xmlns="http://www.w3.org/2000/svg" className="rounded-md h-6 w-6 bg-gray-400 p-1 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+       <svg xmlns="http://www.w3.org/2000/svg" className="rounded-md h-6 w-6 bg-sky-400 p-1 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
 <path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
 </svg>
        </div>
@@ -63,37 +72,37 @@ const Navbar = () => {
        {/* end of this secitio  */}
 
          {/* another section would require component template whrn doing clean up*/}
-         <div className='noti-1'>                                              
+         <div className='noti-1  hover:bg-yellow-100'>                                              
        <div className='flex'>
          <div className=''>
-         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.9}>
+         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-3 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.9}>
  <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
 </svg>
          </div>
-         <div className='font-bold text-gray-800'>
+         <div className=' text-yellow-800'>
      Activity
          </div>
          </div>
        <div>
-       <svg xmlns="http://www.w3.org/2000/svg" className="rounded-md h-6 w-6 bg-gray-400 p-1 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+       <svg xmlns="http://www.w3.org/2000/svg" className="rounded-md h-6 w-6 bg-yellow-200 p-1 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
  <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
 </svg>
        </div>
          </div>
 
-<div className='noti-1'>
+<div className='noti-1  hover:bg-green-100'>
 <div className='flex'>
 <div className=''>
-   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-3 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.9}>
+   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.9}>
 <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
 </svg>
    </div>
-   <div className='font-bold text-gray-800'>
+   <div className=' text-green-800'>
 Schedule
   </div>
    </div>
  <div>
- <svg xmlns="http://www.w3.org/2000/svg" className="rounded-md h-6 w-6 bg-gray-400 p-1 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+ <svg xmlns="http://www.w3.org/2000/svg" className="rounded-md h-6 w-6 bg-green-200 p-1 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg>
  </div>
@@ -151,13 +160,20 @@ Projects
 </div>
 <div>Add a New Todo Branch</div>
 </div>
+<div onClick={() => logout()} className='flex items-center p-2 text-red-400  hover:rounded-lg hover:bg-red-200 cursor-pointer'>
+  <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-red-400 mr-2">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+</svg>
+</div>
+  <div>Logout</div>
+</div>
 
 
-<div className='bot mt-28'>
+<div className='bot mt-28 overflow-hidden'>
 <div className="flex justify-between text-sm items-center p-2 rounded-lg bg-gray-200 mb-1">
             <div className='left'>
               <div className='icon'></div>
-              <div className='text'><div className='font-bold leadin'>{User && User.username}</div><div className='text-xs w-full overflow-hidden'>{User && User.email}</div></div>
+              <div className='text'><div className='font-bold text-xs'>{User && User.username}</div><div className='text-xs w-full overflow-hidden'>{User && User.email}</div></div>
             </div>
             <div className='right'></div>
         </div>

@@ -33,7 +33,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     @apply border-none  bg-transparent focus:outline-none
 }
 .noti-1{
-    @apply flex justify-between items-center align-middle pb-1 px-2 py-2 mb-1 hover:rounded-lg hover:bg-gray-200 
+    @apply flex justify-between items-center cursor-pointer px-2 py-2 mb-1 hover:rounded-lg 
 }
 
 
