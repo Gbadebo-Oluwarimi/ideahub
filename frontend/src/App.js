@@ -10,13 +10,15 @@ import PublicRoutes from './utils/PublicRoutes';
 import Project from './pages/Project';
 import { useSelector } from 'react-redux';
 import Formpopup from '../src/components/dashboardComponent/Popups/Formpopup'
+import Confirmdelete from './components/dashboardComponent/Confirmdelete';
 
 function App() {
 
-  const {form} = useSelector((state) => state.formstate)
+  const {form, confirm} = useSelector((state) => state.formstate)
   return (
     <>
    {form && <Formpopup/>}
+   {confirm && <Confirmdelete/>}
       <Routes>
         <Route element={<PublicRoutes/>}>
             <Route element={<Login/>} path="/"/>

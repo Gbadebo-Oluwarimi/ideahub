@@ -5,6 +5,8 @@ const initialState = {
     todo:false,
     edit:false,
     notification:false,
+    confirm:false,
+    tododelete:null,
 }
 
 const formSlice = createSlice({
@@ -22,9 +24,19 @@ const formSlice = createSlice({
         },
         updatenotificationState:(state) => {
             state.notification = !state.notification
+        },
+        updatedeleteState:(state, action)=> {
+            console.log(action);
+            state.confirm = !state.confirm
+            state.tododelete = action.payload
+
+        },
+        canceldelete:(state) => {
+            state.confirm = !state.confirm
+            state.tododelete = null
         }
     }
 })
 
-export const { updateState, updateTodoState, updateEditState, updatenotificationState } = formSlice.actions
+export const { updateState, updateTodoState, updateEditState, canceldelete,updatenotificationState, updatedeleteState } = formSlice.actions
 export default formSlice.reducer
