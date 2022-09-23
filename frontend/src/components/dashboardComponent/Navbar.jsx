@@ -173,7 +173,7 @@ Projects
 <div className="flex justify-between text-sm items-center p-2 rounded-lg bg-gray-200 mb-1">
             <div className='left'>
               <div className='icon'></div>
-              <div className='text'><div className='font-bold text-xs'>{User && User.username}</div><div className='text-xs w-full overflow-hidden'>{User && User.email}</div></div>
+              <div className='text'><div className='font-bold text-xs'>{User && User.username}</div><div className=' w-full overflow-hidden' style={{fontSize:"10px"}}>{User && User.email}</div></div>
             </div>
             <div className='right'></div>
         </div>
