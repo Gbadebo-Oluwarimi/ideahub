@@ -10,6 +10,7 @@ const Confirmdelete = () => {
     console.log(id)
     dispatch(deleteTodo({id}))
     dispatch(delete_particular_todo(id))
+    dispatch(canceldelete())
   }
   return (
     <div className="glassmorph fixed w-100vh h-screen bg-red">
@@ -19,7 +20,7 @@ const Confirmdelete = () => {
 
         <div className='m-auto max-w-lg rounded-md bg-white p-2 text-center'>
             Any Action performed like deleting ,editing {tododelete.title}<span className='text-red-700'>cannot</span> be reversed
-            <div className='bg-red-600 rounded-md p-3 w-40 text-center' onClick={() => wipeout(tododelete.id)}>Delete</div>
+            <div className='bg-red-600 rounded-md p-3 w-40 text-center cursor-pointer' onClick={() => wipeout(tododelete.sid)}>Delete</div>
             hjvj
         </div>
     </div>
