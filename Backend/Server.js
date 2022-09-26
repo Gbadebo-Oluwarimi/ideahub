@@ -13,7 +13,6 @@ const sgMail = require('@sendgrid/mail');
 const Todomodel = require('../Backend/models/Todos');
 const nodeCron = require('node-cron')
 
-
 sgMail.setApiKey(process.env.API_GRID);
 
 var currentDate  = new Date();
@@ -50,26 +49,56 @@ app.listen(PORT, () => {
     console.log('ran');
 
     await Todomodel.find({ Todo_status:'Pending' }).then((data) => {
-        if(data){
-            console.log(data, 'ok')
-            for(let i=0;i<data.length;i++){
-               console.log(data, 'worked');
-                 //sends mail to the main user
-               const message = {
-                   from:{
-                       name:'Paydate-Picotel',
-                       email:'oluwarimigbadebo@outlook.com',
-                   },
-                   to:`${data[i].User_email}`,
-                   subject:`${data[i].Todo_title} Notification date has been reached`,
-                   html:`<${data[i].Todo_title} Deadline has been reached ${data[i].Todo_deadline}`
-               }
-               sgMail.send(message).then(()=> console.log(`Email Sent for Main User ${data[i].User_email} ....... `))
-               .catch((err) => console.log(err));
+        // if(data){
+        //     console.log(data, 'ok')
+        //     for(let i=0;i<data.length;i++){
+        //        console.log(data, 'worked');
+        //          //sends mail to the main user
+        //        const message = {
+        //            from:{
+        //                name:'Paydate-Picotel',
+        //                email:'oluwarimigbadebo@outlook.com',
+        //            },
+        //            to:`${data[i].User_email}`,
+        //            subject:`${data[i].Todo_title} Notification date has been reached`,
+        //            html:`<${data[i].Todo_title} Deadline has been reached ${data[i].Todo_deadline}`
+        //        }
+        //        sgMail.send(message).then(()=> console.log(`Email Sent for Main User ${data[i].User_email} ....... `))
+        //        .catch((err) => console.log(err));
+        //     }
+        // }else{
+        //     console.log('no user email needs to be sent today')
+        // }
+
+        const msg = {
+            to: 'focuskids.ng@gmail.com',
+            from: 'oluwarimigbadebo@outlook.com', // Use the email address or domain you verified above
+            subject: 'Sending with Twilio SendGrid is Fun',
+            text: 'and easy to do anywhere, even with Node.js',
+            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+          };
+          //ES6
+          sgMail
+            .send(msg)
+            .then(() => {}, error => {
+              console.error(error);
+          
+              if (error.response) {
+                console.error(error.response.body)
+              }
+            });
+          //ES8
+          (async () => {
+            try {
+              await sgMail.send(msg);
+            } catch (error) {
+              console.error(error);
+          
+              if (error.response) {
+                console.error(error.response.body)
+              }
             }
-        }else{
-            console.log('no user email needs to be sent today')
-        }
+          })();
     });
  });
 
