@@ -28,6 +28,9 @@ const TodoSchema = new mongoose.Schema({
         type:mongoose.SchemaTypes.ObjectId,
         ref: 'Todobranch',
         required:true
+    },
+    User_email:{
+      type:String,
     }
 
 }, {timestamps:true}) 

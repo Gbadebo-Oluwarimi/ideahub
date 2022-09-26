@@ -89,8 +89,9 @@ const create_Todo = async(req, res) => {
           res.status(300)
           throw new Error('All fields are required')
         }else{
+            console.log(req.user.email)
             await Todomodel.create({
-                Todo_title,Todo_description,todo_branch_id:Todo_branch_id, Todo_deadline
+                Todo_title,Todo_description,todo_branch_id:Todo_branch_id, Todo_deadline,User_email:req.user.email
             }).then((data) => {
                res.status(200).json(data)
                 console.log('saved succesfully', data)
